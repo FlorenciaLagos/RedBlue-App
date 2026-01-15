@@ -1,6 +1,17 @@
-composer.phar
-/vendor/
+# --- Archivos de sistema (Basura) ---
+.DS_Store
+Thumbs.db
 
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+# --- Archivos con CLAVES ---
+# Aquí pondremos los archivos con contraseñas
+config.php
+database.php
+.env
+conexion.php
+secrets.txt
+
+# --- Carpetas de librerías y temporales ---
+/vendor/
+/node_modules/
+*.log
+error_log
