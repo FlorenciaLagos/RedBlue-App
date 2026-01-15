@@ -1,0 +1,1 @@
+<?php echo "<h1 style='color:red'>ESTÁS EN MODO VULNERABLE 🔴</h1>"; ?>
