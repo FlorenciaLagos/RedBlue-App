@@ -1,38 +1,37 @@
 <?php
-// red/index.php
 session_start();
-require_once '../core/db_connect.php'; // Conectamos a la base de datos
+require_once '../db_connect.php'; 
 
 $mensaje = "";
 
-// Si el usuario envió el formulario...
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $user = $_POST['username'];
     $pass = $_POST['password'];
 
-    // 🚨 EL FALLO DE SEGURIDAD ESTÁ AQUÍ ABAJO 🚨
-    // Estamos pegando el texto del usuario directamente en la consulta.
-    // Esto permite que el usuario "rompa" la frase SQL.
-    $sql = "SELECT * FROM users WHERE username = '$user' AND password = '$pass'";
     
-    // Ejecutamos la consulta tal cual (¡Peligro!)
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM usuarios WHERE username = '$user' AND password = '$pass'";
+    
+    
+    $result = $pdo->query($sql);
+    $row = $result->fetch();
+   if ($row) {
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['role'] = $row['role'];
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $mensaje = "<div style='background:green; color:white; padding:10px;'>🔓 ¡ACCESO CONCEDIDO! Bienvenido, " . $row['username'] . "</div>";
-    } else {
-        $mensaje = "<div style='background:red; color:white; padding:10px;'>❌ Usuario o contraseña incorrectos.</div>";
-    }
+            header("Location: ../dashboard.php");
+            exit();
+        }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Vulnerable (Red Mode)</title>
+    <title> Vulnerable Login - Red Mode</title>
     <style>
         body { font-family: sans-serif; background-color: #ffe6e6; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
         .login-box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-top: 5px solid #e74c3c; width: 300px; }
@@ -45,19 +44,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
     <div class="login-box">
-        <h2 style="text-align:center; color: #c0392b;">🔴 Red Login</h2>
-        <p style="text-align:center; font-size: 12px;">Introduce tus credenciales</p>
+        <h2 style="text-align:center; color: #c0392b;">Red Login</h2>
+        <p style="text-align:center; font-size: 12px;">Introduce your credentials</p>
         
         <?php echo $mensaje; ?>
 
         <form method="POST">
             <input type="text" name="username" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit">login</button>
         </form>
     </div>
 
-    <a href="../index.php" class="back">⬅ Volver al menú</a>
+    <a href="../index.php" class="back">⬅ Back to Menu</a>
 
 </body>
 </html>

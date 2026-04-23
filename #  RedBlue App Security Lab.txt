@@ -1,0 +1,30 @@
+#  RedBlue App Security Lab
+
+Este proyecto es un laboratorio de ciberseguridad desarrollado en **PHP** y **MySQL** para demostrar vulnerabilidades comunes de **OWASP Top 10**.
+
+## Características
+* **Modo Red**: Simulación de login vulnerable a **SQL Injection**.
+* **Modo Blue**: Implementación de defensas con **PDO Prepared Statements** y **Password Hashing (BCRYPT)**.
+
+##  Cómo probarlo
+1. Clona el repositorio en tu servidor local (XAMPP/Laragon).
+2. Importa la base de datos `redblue_db`.
+3. Para el Modo Red, usa el payload: ' OR 1=1 -- 
+4.Para el Modo Blue, usa el usuario: user y la contraseña: admin
+5. Intenta usar el payload 'OR 1=1 -- en el modo Blue
+
+
+# RedBlue App Security lab
+
+This Project is a cybersecurity lab developt in **PHP** and **MySQL** to demonstrate common **OWASP Top 10** vulnerabilities.
+
+##Characteristics
+**Red Mode** **SQL injection** login vulnerability simulation
+**Blue Mode** defenses implemented with **PDO Prepared Statements** and **Password Hashing** 
+
+##How to use 
+1. Clone the repository in your local service (XAMPP/ Laragon)
+2. Import the 'redblue_db' Database
+3. For Red Mode use the payload 'OR 1=1 -- 
+4. For Blue Mode user: user and password: admin
+5. Try using the payoad on Blue Mode
